@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Neurochemical Brain Simulation Design System
+All colors MUST be HSL for scientific visualization theming.
+*/
+
+@layer base {
+  :root {
+    /* Dark Scientific Theme */
+    --background: 220 20% 6%;
+    --foreground: 220 15% 95%;
+
+    --card: 220 18% 8%;
+    --card-foreground: 220 15% 95%;
+
+    --popover: 220 18% 8%;
+    --popover-foreground: 220 15% 95%;
+
+    --primary: 200 100% 60%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 220 15% 95%;
+
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 65%;
+
+    --accent: 280 100% 70%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 15% 95%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 15%;
+    --ring: 200 100% 60%;
+
+    /* Neurochemical Colors */
+    --dopamine: 45 100% 60%;
+    /* Golden yellow - reward circuits */
+    --serotonin: 210 100% 60%;
+    /* Blue - mood regulation */
+    --gaba: 120 80% 50%;
+    /* Green - inhibitory calming */
+    --glutamate: 0 100% 60%;
+    /* Red - excitatory firing */
+    --acetylcholine: 280 100% 70%;
+    /* Purple - memory & learning */
+    --norepinephrine: 30 100% 60%;
+    /* Orange - alertness */
+
+    /* Glow Effects */
+    --glow-dopamine: 45 100% 60% / 0.3;
+    --glow-serotonin: 210 100% 60% / 0.3;
+    --glow-gaba: 120 80% 50% / 0.3;
+    --glow-glutamate: 0 100% 60% / 0.3;
+    --glow-accent: 280 100% 70% / 0.3;
+
+    /* Gradients */
+    --gradient-neural: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-brain: radial-gradient(circle, hsl(var(--primary) / 0.1), hsl(var(--background)));
+
+    /* Brain Regions */
+    --prefrontal: 200 100% 60%;
+    --hippocampus: 150 80% 60%;
+    --amygdala: 350 80% 60%;
+    --visual-cortex: 60 100% 60%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Premium 3D Scroll Effects Animations */
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Enhanced molecule effects */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+@keyframes orbital {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+/* Smooth DNA Effects - No jarring rotations */
+@keyframes dna-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+    opacity: 0.7;
+  }
+
+  50% {
+    box-shadow: 0 0 16px currentColor, 0 0 32px currentColor, 0 0 48px currentColor;
+    opacity: 1;
+  }
+}
+
+@keyframes smooth-pulse {
+
+  0%,
+  100% {
+    transform: scale(0.9);
+    filter: brightness(0.8);
+  }
+
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes entity-trail {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-orbital {
+  animation: orbital 8s linear infinite;
+}
+
+.animate-dna-glow {
+  animation: dna-glow 2s ease-in-out infinite;
+}
+
+.animate-smooth-pulse {
+  animation: smooth-pulse 3s ease-in-out infinite;
+}
+
+.animate-entity-trail {
+  animation: entity-trail 1s ease-out forwards;
+}
