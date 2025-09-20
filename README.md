@@ -1,22 +1,14 @@
-# Welcome to your Lovable project
+# Neurosuit
 
-## Project info
-
-**URL**: https://lovable.dev/projects/58d27360-813b-4243-937d-1b317f952dd4
+Interactive neuroscience visualizations, dopamine modeling, and learning tools.
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/58d27360-813b-4243-937d-1b317f952dd4) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -61,13 +53,11 @@ This project is built with:
 - Tailwind CSS
 
 ## How can I deploy this project?
+Deploy with your preferred platform (Vercel, Netlify, GitHub Pages, etc.).
 
-Simply open [Lovable](https://lovable.dev/projects/58d27360-813b-4243-937d-1b317f952dd4) and click on Share -> Publish.
+### Vercel quick start
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```sh
+npm run build
+npx vercel deploy --prebuilt
+```

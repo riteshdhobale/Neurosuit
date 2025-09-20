@@ -4,9 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Trash2, Plus, TrendingUp, TrendingDown } from 'lucide-react';
-import { Activity, ACTIVITY_PRESETS } from '@/types/dopamine';
+import { Trash2, Plus, TrendingUp, TrendingDown, BrainCircuit } from 'lucide-react';
+import { Activity, ACTIVITY_PRESETS, DopaminePathway } from '@/types/dopamine';
 import { DopamineChart } from './DopamineChart';
+import { RewardPredictionErrorViz } from './activities/RewardPredictionError';
 import { useToast } from '@/hooks/use-toast';
 
 export const DopamineTracker = () => {
@@ -28,7 +29,7 @@ export const DopamineTracker = () => {
     };
 
     setActivities(prev => [...prev, newActivity].sort((a, b) => a.time.localeCompare(b.time)));
-    
+
     toast({
       title: `${preset.name} Added`,
       description: `${preset.type === 'good' ? '📈' : '📉'} ${preset.type === 'good' ? 'Dopamine boost planned!' : 'Dopamine cost calculated'}`,
@@ -63,7 +64,7 @@ export const DopamineTracker = () => {
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex justify-center gap-2 mb-4">
-            <Button 
+            <Button
               onClick={() => window.history.back()}
               variant="outline"
               size="sm"
@@ -76,7 +77,7 @@ export const DopamineTracker = () => {
             Dopamine Currency Tracker
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Plan your day and see your dopamine "currency" flow in real-time. Based on neuroscience research 
+            Plan your day and see your dopamine "currency" flow in real-time. Based on neuroscience research
             about reward prediction error and baseline dopamine levels.
           </p>
         </div>
@@ -147,23 +148,55 @@ export const DopamineTracker = () => {
                   </p>
                 ) : (
                   activities.map((activity) => (
-                    <div key={activity.id} className="flex items-center justify-between p-3 rounded-lg border border-border bg-card/50">
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-sm text-muted-foreground">
-                          {activity.time}
-                        </span>
-                        <span className="font-medium">{activity.name}</span>
-                        <Badge variant={activity.type === 'good' ? 'default' : 'destructive'}>
-                          {activity.type === 'good' ? '+' : ''}{activity.dopamineImpact.baseline}
-                        </Badge>
+                    <div key={activity.id} className="flex flex-col p-3 rounded-lg border border-border bg-card/50">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-sm text-muted-foreground">
+                            {activity.time}
+                          </span>
+                          <span className="font-medium">{activity.name}</span>
+                          <Badge variant={activity.type === 'good' ? 'default' : 'destructive'}>
+                            {activity.type === 'good' ? '+' : ''}{activity.dopamineImpact.baseline}
+                          </Badge>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => removeActivity(activity.id)}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeActivity(activity.id)}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
+
+                      {/* Additional neuroscientifc details */}
+                      {activity.brainRegions && activity.brainRegions.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {activity.brainRegions.map(region => (
+                            <span key={region} className="inline-flex items-center px-2 py-0.5 rounded text-xs bg-primary/10 text-primary">
+                              <BrainCircuit className="w-3 h-3 mr-1" />
+                              {region.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {activity.pathway && (
+                        <div className="mt-1 text-xs text-muted-foreground">
+                          Primary pathway: <span className="font-medium">{activity.pathway}</span>
+                        </div>
+                      )}
+
+                      {activity.tolerance && activity.type === 'bad' && (
+                        <div className="mt-1 text-xs text-amber-500">
+                          ⚠️ Builds tolerance over time
+                        </div>
+                      )}
+
+                      {typeof activity.habitFormingIndex === 'number' && activity.habitFormingIndex > 7 && (
+                        <div className="mt-1 text-xs text-red-500">
+                          ⚠️ Highly habit-forming (Index: {activity.habitFormingIndex}/10)
+                        </div>
+                      )}
                     </div>
                   ))
                 )}
@@ -180,6 +213,11 @@ export const DopamineTracker = () => {
               <DopamineChart activities={activities} />
             </CardContent>
           </Card>
+
+          {/* Add Reward Prediction Error visualization */}
+          <div className="lg:col-span-2 mt-2">
+            <RewardPredictionErrorViz />
+          </div>
         </div>
       </div>
     </div>
